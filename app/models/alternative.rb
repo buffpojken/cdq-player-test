@@ -1,0 +1,6 @@
+class Alternative < CDQManagedObject
+
+	
+
+
+end

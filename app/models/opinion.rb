@@ -1,0 +1,4 @@
+class Opinion < CDQManagedObject
+
+
+end

@@ -1,0 +1,4 @@
+class Argument < CDQManagedObject
+
+
+end

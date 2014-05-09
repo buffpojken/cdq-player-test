@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="0001 initial" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12D78" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+  <entity name="Scenario" syncable="YES" representedClassName="Scenario">
+    <attribute optional="YES" syncable="YES" attributeType="String" name="id"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="name"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="parties" inverseEntity="Party" destinationEntity="Party" inverseName="scenario" toMany="YES"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="questions" inverseEntity="Question" destinationEntity="Question" inverseName="scenario" toMany="YES"/>
+  </entity>
+  <entity name="Party" syncable="YES" representedClassName="Party">
+    <attribute optional="YES" syncable="YES" attributeType="String" name="id"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="name"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="avatar_url"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="slogan"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="characters" inverseEntity="Character" destinationEntity="Character" inverseName="party" toMany="YES"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="scenario" inverseEntity="Scenario" destinationEntity="Scenario" inverseName="parties" maxCount="1"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="players" inverseEntity="Player" destinationEntity="Player" inverseName="party" toMany="YES"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="questions" inverseEntity="Question" destinationEntity="Question" inverseName="party" toMany="YES"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="opinions" inverseEntity="Opinion" destinationEntity="Opinion" inverseName="party" toMany="YES"/>
+  </entity>
+  <entity name="Character" syncable="YES" representedClassName="Character">
+    <attribute optional="YES" syncable="YES" attributeType="String" name="id"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="name"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="concept"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="party" inverseEntity="Party" destinationEntity="Party" inverseName="characters" maxCount="1"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="player" inverseEntity="Player" destinationEntity="Player" inverseName="character" maxCount="1"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="question" inverseEntity="Question" destinationEntity="Question" inverseName="characters" maxCount="1"/>
+  </entity>
+  <entity name="Question" syncable="YES" representedClassName="Question">
+    <attribute optional="YES" syncable="YES" attributeType="String" name="id"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="name"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="desc"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="scenario" inverseEntity="Scenario" destinationEntity="Scenario" inverseName="questions" maxCount="1"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="party" inverseEntity="Party" destinationEntity="Party" inverseName="questions" maxCount="1"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="characters" inverseEntity="Character" destinationEntity="Character" inverseName="question" toMany="YES"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="players" inverseEntity="Player" destinationEntity="Player" inverseName="question" toMany="YES"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="alternatives" inverseEntity="Alternative" destinationEntity="Alternative" inverseName="question" toMany="YES"/>
+  </entity>
+  <entity name="Alternative" syncable="YES" representedClassName="Alternative">
+    <attribute optional="YES" syncable="YES" attributeType="String" name="id"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="name"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="desc"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="question" inverseEntity="Question" destinationEntity="Question" inverseName="alternatives" maxCount="1"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="arguments" inverseEntity="Argument" destinationEntity="Argument" inverseName="alternative" toMany="YES"/>
+  </entity>
+  <entity name="Argument" syncable="YES" representedClassName="Argument">
+    <attribute optional="YES" syncable="YES" attributeType="String" name="id"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="desc"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="alternative" inverseEntity="Alternative" destinationEntity="Alternative" inverseName="arguments" maxCount="1"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="opinions" inverseEntity="Opinion" destinationEntity="Opinion" inverseName="argument" toMany="YES"/>
+  </entity>
+  <entity name="Opinion" syncable="YES" representedClassName="Opinion">
+    <attribute optional="YES" syncable="YES" attributeType="String" name="id"/>
+    <attribute optional="YES" syncable="YES" attributeType="Integer 16" name="points" defaultValueString="0"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="party" inverseEntity="Party" destinationEntity="Party" inverseName="opinions" maxCount="1"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="argument" inverseEntity="Argument" destinationEntity="Argument" inverseName="opinions" maxCount="1"/>
+  </entity>
+  <entity name="Player" syncable="YES" representedClassName="Player">
+    <attribute optional="YES" syncable="YES" attributeType="String" name="id"/>
+    <attribute optional="YES" syncable="YES" attributeType="String" name="name"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="character" inverseEntity="Character" destinationEntity="Character" inverseName="player" maxCount="1"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="party" inverseEntity="Party" destinationEntity="Party" inverseName="players" maxCount="1"/>
+    <relationship optional="YES" deletionRule="Nullify" syncable="YES" name="question" inverseEntity="Question" destinationEntity="Question" inverseName="players" maxCount="1"/>
+  </entity>
+</model>
